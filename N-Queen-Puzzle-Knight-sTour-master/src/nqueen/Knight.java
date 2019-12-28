@@ -29,35 +29,41 @@ public class Knight extends JPanel {
     private static boolean exit = false;
     private static boolean noSol = false;
     public static int size = 35; // size of the cell
-    public static int margin = 80;   // margin of the board
+    public static int margin = 80;   // margen del frame
     private static boolean started = false;
     static JFrame frame;
+    private static int x;
+    private static int y;
     public Knight() {
         
         initComponents();
     }
     
     public static void main(String[] args){
-        dimension = Integer.parseInt(args[0]);
-        size = Integer.parseInt(args[1]);
+        dimension = Integer.parseInt(args[0]); // n x n
+        size = Integer.parseInt(args[1]);  // tamaño de cada casilla
+        x = Integer.parseInt(args[2]);
+        y = Integer.parseInt(args[3]);
         //margin = (args[2].equals("1")) ? size : 0;
         bigDim = dimension + 4;
-        dim = dimension * size;
+        dim = dimension * size; // el largo del cuadrado
         
         frame = new JFrame();
-        frame.setSize(dim+2*margin, dim+2*margin+size/2);
+        frame.setSize(dim+2*margin, dim+2*margin+size/2); 
         frame.getContentPane().add(new Knight());
         frame.setLocationRelativeTo(null);
         frame.setBackground(Color.LIGHT_GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         
-        JButton btnNext = new JButton();
+        JButton btnNext = new JButton(); //todo el panel es un botón gigante
         btnNext.setVisible(true);
         frame.add(btnNext);
         btnNext.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
                 step++;
+                System.out.print("EL contador = " +step + "\n");
+                
               }
         });
         start();
@@ -71,22 +77,22 @@ public class Knight extends JPanel {
             for (int c = 0; c < bigDim; c++)
                 if (r < 2 || r > bigDim - 3 || c < 2 || c > bigDim - 3)
                     bigTable[r][c] = -1;
- 
-        int row = 2 + (int) (Math.random() * (dimension));
-        int col = 2 + (int) (Math.random() * (dimension));
- 
+        
+        //definimos las posiciones iniciales x,y
+        int row = x + 1; //* dimension ;// 2 + (int) (Math.random() * (dimension));
+        int col = y + 1; //* dimension;//(int) (Math.random() * (dimension));
+        
         bigTable[row][col] = 1;
  
         if (solve(row, col, 2))
             locateHorse(bigDim);
         else 
             ;
-        
     }
   
-    private static boolean solve(int r, int c, int count) {
+    private static boolean solve(int r, int c, int count) { // count = 2,  
         if (count > total)
-            return true;
+            return true; // no entra aqui porque esto no es verdad 2 > 64 
  
         List<int[]> nbrs = sides(r, c);
  
@@ -114,23 +120,23 @@ public class Knight extends JPanel {
     private static List<int[]> sides(int r, int c) {
         List<int[]> nbrs = new ArrayList<>();
  
-        for (int[] m : KnightsMovement) {
+        for (int[] m : KnightsMovement) { //un for para recorrer todos los posibles movimientos del caballo
             int x = m[0];
             int y = m[1];
-            if (bigTable[r + y][c + x] == 0) {
-                int num = countsides(r + y, c + x);
+            if (bigTable[r + y][c + x] == 0) { //si la casella està buida
+                int num = countsides(r + y, c + x); //suma el movimiento del caballo a nuestra row y columna
                 nbrs.add(new int[]{r + y, c + x, num});
             }
         }
         return nbrs;
     }
  
-    private static int countsides(int r, int c) {
+    private static int countsides(int r, int c) { //le pasamos ya el movimiento dnde queremos poner el caballo
         int num = 0;
         for (int[] m : KnightsMovement)
-            if (bigTable[r + m[1]][c + m[0]] == 0)
+            if (bigTable[r + m[1]][c + m[0]] == 0) 
                 num++;
-        return num;
+        return num;// creemos que cuenta las posibles soluciones dnde colocar caballo
     }
  
     private static boolean orphanDetected(int cnt, int r, int c) {

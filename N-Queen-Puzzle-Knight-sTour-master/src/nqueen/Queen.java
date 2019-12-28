@@ -17,6 +17,8 @@ public class Queen extends JPanel {
      private static char[][] t;
      private static int size = 35; // size of the cell
      private static int margin = 80;   // margin of the board
+     private static int x;
+     private static int y;
     
      
       public void paint(Graphics g){
@@ -56,6 +58,9 @@ public class Queen extends JPanel {
    
     dimension = Integer.parseInt(args[0]);
     size = Integer.parseInt(args[1]);
+    x = Integer.parseInt(args[2]);
+    y = Integer.parseInt(args[3]);
+    
     dim = dimension * size;
     JFrame frame = new JFrame();
     frame.setSize(dim+2* + margin, dim+2* + margin + size / 2);

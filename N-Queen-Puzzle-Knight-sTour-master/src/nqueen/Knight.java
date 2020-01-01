@@ -1,45 +1,33 @@
 package nqueen;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.util.*;
+import javax.swing.*;
 
-/**
- *
- * @author ozzy
- */
 public class Knight extends JPanel {
-    private static int bigDim;
-    private static int dim;
-    private static int dimension;
+    private  int bigDim;
+    private  int dim;
+    private  int dimension;   
     private final static int[][] KnightsMovement = {{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}};  // knight moves : 8 different ways
-    private static int[][] bigTable;
-    private static int total;
-    private static int t[][];    
-    private static int step = 0;
-    private static boolean exit = false;
-    private static boolean noSol = false;
-    public static int size = 35; // size of the cell
-    public static int margin = 80;   // margen del frame
-    private static boolean started = false;
+    private int[][] bigTable;
+    private int total;
+    private  int t[][];    
+    private  int step = 0;
+    private  boolean exit = false;
+    private  boolean noSol = false;
+    public int size = 35; // size of the cell
+    public  int margin = 80;   // margen del frame
+    private boolean started = false;
     static JFrame frame;
-    private static int x;
-    private static int y;
+    private  int x;
+    private  int y;
     public Knight() {
         
         initComponents();
     }
     
-    public static void main(String[] args){
+    public Knight(String[] args){
         dimension = Integer.parseInt(args[0]); // n x n
         size = Integer.parseInt(args[1]);  // tamaño de cada casilla
         x = Integer.parseInt(args[2]);
@@ -53,7 +41,7 @@ public class Knight extends JPanel {
         frame.getContentPane().add(new Knight());
         frame.setLocationRelativeTo(null);
         frame.setBackground(Color.LIGHT_GRAY);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         
         JButton btnNext = new JButton(); //todo el panel es un botón gigante
@@ -69,7 +57,7 @@ public class Knight extends JPanel {
         start();
     }
     
-    private static void start(){
+    private void start(){
         bigTable = new int[bigDim][bigDim]; 
         total = (dimension) * (dimension);
         t = new int[dimension][dimension];
@@ -84,31 +72,39 @@ public class Knight extends JPanel {
         
         bigTable[row][col] = 1;
  
-        if (solve(row, col, 2))
+        if (solve(row, col, 2)) // el segundo movimiento
             locateHorse(bigDim);
         else 
             ;
     }
   
-    private static boolean solve(int r, int c, int count) { // count = 2,  
+    private boolean solve(int r, int c, int count) { // count = 2,  
         if (count > total)
             return true; // no entra aqui porque esto no es verdad 2 > 64 
  
         List<int[]> nbrs = sides(r, c);
- 
-        if (nbrs.isEmpty() && count != total)
+        //nbrs = array con las filas y columnas, y el numero de las posibles soluciones  
+        //si todas las casillas estan ocupadas o fuera del rango entonces nbrs = empty
+        if (nbrs.isEmpty() && count != total)  // si hay     2 != 64
             return false;
- 
-        Collections.sort(nbrs, new Comparator<int[]>() {
+        
+        //Ordena si hay algo en nbrs, de forma que funcione
+        //mira si la casilla ya se ha ocupado o no
+        Collections.sort(nbrs, new Comparator<int[]>() {  
             public int compare(int[] a, int[] b) {
+                int aux = a[2] - b[2];
                 return a[2] - b[2];
             }
         });
- 
-        for (int[] nb : nbrs) {
-            r = nb[0];
-            c = nb[1];
-            bigTable[r][c] = count;
+        
+        
+        
+        //nbrs[0] = {5, 7, 2}
+        for (int[] nb : nbrs) { //nb = nbrs[0]
+            r = nb[0]; //nb[0] = 5
+            c = nb[1]; //nb[1] = 7
+            bigTable[r][c] = count; // count = el numero del paso
+            //aqui si hay 
             if (!orphanDetected(count, r, c) && solve(r, c, count + 1))
                 return true;
             bigTable[r][c] = 0;
@@ -117,7 +113,7 @@ public class Knight extends JPanel {
         return false;
     }
  
-    private static List<int[]> sides(int r, int c) {
+    private  List<int[]> sides(int r, int c) {
         List<int[]> nbrs = new ArrayList<>();
  
         for (int[] m : KnightsMovement) { //un for para recorrer todos los posibles movimientos del caballo
@@ -125,40 +121,56 @@ public class Knight extends JPanel {
             int y = m[1];
             if (bigTable[r + y][c + x] == 0) { //si la casella està buida
                 int num = countsides(r + y, c + x); //suma el movimiento del caballo a nuestra row y columna
-                nbrs.add(new int[]{r + y, c + x, num});
+                nbrs.add(new int[]{r + y, c + x, num}); //añadimos al array lista su nueva posicion 
+            // en el array tenemos = fila, columna y las posibles posiciones
             }
         }
+        
+        //si todas las casillas estan ocupadas o fuera del rango entonces nbrs = empty
         return nbrs;
     }
- 
-    private static int countsides(int r, int c) { //le pasamos ya el movimiento dnde queremos poner el caballo
+    //devuelve cuantas opciones hay realmente de las 8
+    private  int countsides(int r, int c) { //le pasamos ya el movimiento dnde queremos poner el caballo
         int num = 0;
-        for (int[] m : KnightsMovement)
-            if (bigTable[r + m[1]][c + m[0]] == 0) 
+        for (int[] m : KnightsMovement) //m = el primer movimiento {1, -2}
+            if (bigTable[r + m[1]][c + m[0]] == 0){ 
                 num++;
-        return num;// creemos que cuenta las posibles soluciones dnde colocar caballo
+            }
+        return num;// creemos que cuenta las posibles soluciones dnde colocar caballo 
     }
  
-    private static boolean orphanDetected(int cnt, int r, int c) {
-        if (cnt < total - 1) {
+    private boolean orphanDetected(int cnt, int r, int c) {
+        if (cnt < total - 1) {  // 2 < 64-1
             List<int[]> nbrs = sides(r, c);
-            for (int[] nb : nbrs)
-                if (countsides(nb[0], nb[1]) == 0)
+            for (int[] nb : nbrs) //nb = nbrs[0]
+                //entre las diferentes opciones que tenemos
+                //elige la primera
+                if (countsides(nb[0], nb[1]) == 0)  
                     return true;
         }
         return false;
     }
  
-    private static void locateHorse(int n) {
+    private void locateHorse(int n) {
         for (int i = 0; i < n; i++){
             for (int j = 0; j < n; j++){
+                //si es un margen = -1 no va a situar el caballo por eso pasa a la 
+                //siguiente iteración
                 if (bigTable[i][j] == -1) continue;
-                t[i-2][j-2] = bigTable[i][j];
+                System.out.println("donde colocaremos en bigtable i: " + i + " j: " +j);
+                t[i-2][j-2] = bigTable[i][j]; //t va a poner las soluciones correctas
+                
+                System.out.println("t");
+                for (int k = 0; k < dimension; k++){      //columna
+                    for (int l = 0; l < dimension; l ++){ //fila
+                        System.out.print(t[l][k] + "   ");  
+                    }
+                    System.out.println("");
+                }
             }
         }
     }
     
-     
     public void paint(Graphics g){
         int d = dimension;
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/knight.png");
@@ -183,7 +195,7 @@ public class Knight extends JPanel {
         
         for(int i = 0; i < d; i++)
             for(int j = 0; j < d; j++)
-                if(t[i][j] == 0 && started)
+                if(t[i][j] == 0 && started) 
                     g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
         
         for(int i = 0; i < d; i++)

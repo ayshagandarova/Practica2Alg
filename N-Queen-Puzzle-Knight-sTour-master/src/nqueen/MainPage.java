@@ -5,15 +5,9 @@
  */
 package nqueen;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
 
-/**
- *
- * @author ozzy
- */
 public class MainPage extends javax.swing.JFrame {
    
     private static String msg1 = "Can not find solution, please try again "
@@ -64,12 +58,11 @@ public class MainPage extends javax.swing.JFrame {
 
         TextDimension.setText("8");
         TextDimension.setToolTipText("");
-        TextDimension.setSize(new java.awt.Dimension(100, 20));
         TextDimension.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 TextDimensionInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         TextDimension.addActionListener(new java.awt.event.ActionListener() {
@@ -118,11 +111,14 @@ public class MainPage extends javax.swing.JFrame {
 
         cellCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80" }));
 
+        jText_posx.setText("1");
         jText_posx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jText_posxActionPerformed(evt);
             }
         });
+
+        jText_posy.setText("1");
 
         jLabel5.setText("inicial x:");
 
@@ -245,18 +241,24 @@ public class MainPage extends javax.swing.JFrame {
         try{
         int dim = Integer.parseInt(arr[0]);
         
-        if(radBtn2.isSelected())
+        if(radBtn2.isSelected()){
             if(dim > 14 || dim < 1){
                 JOptionPane.showMessageDialog(this, msg2);
             }
             else{
                 Queen.main(arr);
-        }
-        else{
-            if(dim == 2 || dim == 3 || dim == 4)
-                JOptionPane.showMessageDialog(this, msg1);
-            else Knight.main(arr);
             }
+        }else{
+            if(dim == 2 || dim == 3 || dim == 4){
+                JOptionPane.showMessageDialog(this, msg1);
+            }else{
+                Knight k1 = new Knight(arr);
+                Knight k2 = new Knight(arr);
+                Knight k3 = new Knight(arr);
+                Knight k4 = new Knight(arr);
+                
+            }
+        }
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, "Please enter natural number");
         }

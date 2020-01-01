@@ -7,18 +7,13 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author ozzy
- */
 public class Queen extends JPanel {
-        
-     private static int dimension, dim;
-     private static char[][] t;
-     private static int size = 35; // size of the cell
-     private static int margin = 80;   // margin of the board
-     private static int x;
-     private static int y;
+    private static int dimension, dim;
+    private static char[][] t;
+    private static int size = 35; // size of the cell
+    private static int margin = 80;   // margin of the board
+    private static int x;
+    private static int y;
     
      
       public void paint(Graphics g){
@@ -46,9 +41,7 @@ public class Queen extends JPanel {
         for(int i = 0; i < d; i++)
             for(int j = 0; j < d; j++)
                 if(t[i][j] == 'Q')
-                g.drawImage(img1, margin + i*size, margin + j * size, size, size , null , this);
-        
-        
+                g.drawImage(img1, margin + i*size, margin + j * size, size, size , null , this); 
     }
     public Queen() {
         initComponents();
@@ -67,7 +60,7 @@ public class Queen extends JPanel {
     frame.getContentPane().add(new Queen());
     frame.setLocationRelativeTo(null);
     frame.setBackground(Color.LIGHT_GRAY);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
     t = new char[dimension][dimension];
         enumerate(dimension);

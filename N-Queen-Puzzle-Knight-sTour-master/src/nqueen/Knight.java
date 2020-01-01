@@ -6,28 +6,28 @@ import java.util.*;
 import javax.swing.*;
 
 public class Knight extends JPanel {
-    private  int bigDim;
-    private  int dim;
-    private  int dimension;   
+    private static int bigDim;
+    private static int dim;
+    private static int dimension;   
     private final static int[][] KnightsMovement = {{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}};  // knight moves : 8 different ways
-    private int[][] bigTable;
-    private int total;
-    private  int t[][];    
-    private  int step = 0;
-    private  boolean exit = false;
-    private  boolean noSol = false;
-    public int size = 35; // size of the cell
-    public  int margin = 80;   // margen del frame
+    private static int[][] bigTable;
+    private static int total;
+    private static int t[][];    
+    private static int step = 0;
+    private static boolean exit = false;
+    private static boolean noSol = false;
+    public static int size = 35; // size of the cell
+    public static int margin = 80;   // margen del frame
     private boolean started = false;
     static JFrame frame;
-    private  int x;
-    private  int y;
+    private static int x;
+    private static int y;
     public Knight() {
         
         initComponents();
     }
     
-    public Knight(String[] args){
+    public static void main(String[] args){
         dimension = Integer.parseInt(args[0]); // n x n
         size = Integer.parseInt(args[1]);  // tamaño de cada casilla
         x = Integer.parseInt(args[2]);
@@ -57,7 +57,7 @@ public class Knight extends JPanel {
         start();
     }
     
-    private void start(){
+    private static void start(){
         bigTable = new int[bigDim][bigDim]; 
         total = (dimension) * (dimension);
         t = new int[dimension][dimension];
@@ -78,7 +78,7 @@ public class Knight extends JPanel {
             ;
     }
   
-    private boolean solve(int r, int c, int count) { // count = 2,  
+    private static boolean solve(int r, int c, int count) { // count = 2,  
         if (count > total)
             return true; // no entra aqui porque esto no es verdad 2 > 64 
  
@@ -113,7 +113,7 @@ public class Knight extends JPanel {
         return false;
     }
  
-    private  List<int[]> sides(int r, int c) {
+    private static List<int[]> sides(int r, int c) {
         List<int[]> nbrs = new ArrayList<>();
  
         for (int[] m : KnightsMovement) { //un for para recorrer todos los posibles movimientos del caballo
@@ -130,7 +130,7 @@ public class Knight extends JPanel {
         return nbrs;
     }
     //devuelve cuantas opciones hay realmente de las 8
-    private  int countsides(int r, int c) { //le pasamos ya el movimiento dnde queremos poner el caballo
+    private static int countsides(int r, int c) { //le pasamos ya el movimiento dnde queremos poner el caballo
         int num = 0;
         for (int[] m : KnightsMovement) //m = el primer movimiento {1, -2}
             if (bigTable[r + m[1]][c + m[0]] == 0){ 
@@ -139,7 +139,7 @@ public class Knight extends JPanel {
         return num;// creemos que cuenta las posibles soluciones dnde colocar caballo 
     }
  
-    private boolean orphanDetected(int cnt, int r, int c) {
+    private static boolean orphanDetected(int cnt, int r, int c) {
         if (cnt < total - 1) {  // 2 < 64-1
             List<int[]> nbrs = sides(r, c);
             for (int[] nb : nbrs) //nb = nbrs[0]
@@ -151,7 +151,7 @@ public class Knight extends JPanel {
         return false;
     }
  
-    private void locateHorse(int n) {
+    private static void locateHorse(int n) {
         for (int i = 0; i < n; i++){
             for (int j = 0; j < n; j++){
                 //si es un margen = -1 no va a situar el caballo por eso pasa a la 

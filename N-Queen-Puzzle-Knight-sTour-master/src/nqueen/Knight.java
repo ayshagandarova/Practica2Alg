@@ -8,26 +8,29 @@ import javax.swing.*;
 public class Knight extends JPanel {
     private static int bigDim;
     private static int dim;
-    private static int dimension;   
+    private int dimension;   
     private final static int[][] KnightsMovement = {{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}};  // knight moves : 8 different ways
-    private static int[][] bigTable;
-    private static int total;
-    private static int t[][];    
+    private int[][] bigTable;
+    private int total;
+    private int t[][];    
     private static int step = 0;
     private static boolean exit = false;
     private static boolean noSol = false;
     public static int size = 35; // size of the cell
-    public static int margin = 80;   // margen del frame
+    public int margin = 80;   // margen del frame
     private boolean started = false;
     static JFrame frame;
     private static int x;
     private static int y;
+    
+    
     public Knight() {
-        
         initComponents();
     }
     
-    public static void main(String[] args){
+    public Knight(String[] args){
+        //frame.getContentPane().add(new Knight());
+        //initComponents();
         dimension = Integer.parseInt(args[0]); // n x n
         size = Integer.parseInt(args[1]);  // tamaño de cada casilla
         x = Integer.parseInt(args[2]);
@@ -57,7 +60,7 @@ public class Knight extends JPanel {
         start();
     }
     
-    private static void start(){
+    private void start(){
         bigTable = new int[bigDim][bigDim]; 
         total = (dimension) * (dimension);
         t = new int[dimension][dimension];
@@ -78,7 +81,7 @@ public class Knight extends JPanel {
             ;
     }
   
-    private static boolean solve(int r, int c, int count) { // count = 2,  
+    private boolean solve(int r, int c, int count) { // count = 2,  
         if (count > total)
             return true; // no entra aqui porque esto no es verdad 2 > 64 
  
@@ -113,7 +116,7 @@ public class Knight extends JPanel {
         return false;
     }
  
-    private static List<int[]> sides(int r, int c) {
+    private List<int[]> sides(int r, int c) {
         List<int[]> nbrs = new ArrayList<>();
  
         for (int[] m : KnightsMovement) { //un for para recorrer todos los posibles movimientos del caballo
@@ -130,7 +133,7 @@ public class Knight extends JPanel {
         return nbrs;
     }
     //devuelve cuantas opciones hay realmente de las 8
-    private static int countsides(int r, int c) { //le pasamos ya el movimiento dnde queremos poner el caballo
+    private int countsides(int r, int c) { //le pasamos ya el movimiento dnde queremos poner el caballo
         int num = 0;
         for (int[] m : KnightsMovement) //m = el primer movimiento {1, -2}
             if (bigTable[r + m[1]][c + m[0]] == 0){ 
@@ -139,7 +142,7 @@ public class Knight extends JPanel {
         return num;// creemos que cuenta las posibles soluciones dnde colocar caballo 
     }
  
-    private static boolean orphanDetected(int cnt, int r, int c) {
+    private boolean orphanDetected(int cnt, int r, int c) {
         if (cnt < total - 1) {  // 2 < 64-1
             List<int[]> nbrs = sides(r, c);
             for (int[] nb : nbrs) //nb = nbrs[0]
@@ -151,7 +154,7 @@ public class Knight extends JPanel {
         return false;
     }
  
-    private static void locateHorse(int n) {
+    private void locateHorse(int n) {
         for (int i = 0; i < n; i++){
             for (int j = 0; j < n; j++){
                 //si es un margen = -1 no va a situar el caballo por eso pasa a la 
@@ -193,11 +196,14 @@ public class Knight extends JPanel {
             }
         }
         
-        for(int i = 0; i < d; i++)
-            for(int j = 0; j < d; j++)
+        for(int i = 0; i < d; i++){
+            for(int j = 0; j < d; j++){
+                System.out.println("valor de t abans de 198: "+ t[i][j] );
+                System.out.println("valor de started: "+ started);
                 if(t[i][j] == 0 && started) 
                     g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
-        
+            }
+        }
         for(int i = 0; i < d; i++)
             for(int j = 0; j < d; j++)
                 if(step == total+1){

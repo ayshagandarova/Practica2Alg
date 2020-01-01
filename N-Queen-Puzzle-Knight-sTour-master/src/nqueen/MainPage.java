@@ -252,11 +252,11 @@ public class MainPage extends javax.swing.JFrame {
             if(dim == 2 || dim == 3 || dim == 4){
                 JOptionPane.showMessageDialog(this, msg1);
             }else{
-                Knight.main(arr);
-//                Knight k1 = new Knight(arr);
-//                Knight k2 = new Knight(arr);
-//                Knight k3 = new Knight(arr);
-//                Knight k4 = new Knight(arr);
+                //Knight.main(arr);
+                Knight k1 = new Knight(arr);
+                Knight k2 = new Knight(arr);
+                Knight k3 = new Knight(arr);
+                Knight k4 = new Knight(arr);
                 
             }
         }

@@ -10,7 +10,6 @@ public class Knight3 extends JPanel {
     private static int dim;
     private static int dimension;   
     private final static int[][] KnightsMovement = {{-2,1},{1,2},{-1,2},{-1,-2},{2,1},{2,-1},{1,-2},{-2,-1}};  // knight moves : 8 different ways
-    //{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}}
     private static int[][] bigTable;
     private static int total;
     private static int t[][];    
@@ -23,7 +22,9 @@ public class Knight3 extends JPanel {
     static JFrame frame;
     private static int x;
     private static int y;
-    
+    private static String[] stepsScreen;
+    private static int merywiss[][]; 
+    private int indexStep = 0;
     
     public Knight3() {
         initComponents();
@@ -53,9 +54,10 @@ public class Knight3 extends JPanel {
         frame.add(btnNext);
         btnNext.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stepsScreen[step] = ""+ step;
+                System.out.print("----------------El contador = " +stepsScreen[step] + "\n");
                 step++;
-                System.out.print("EL contador = " +step + "\n");
-                
+                stepsScreen[step] = "";
               }
         });
         start();
@@ -64,7 +66,15 @@ public class Knight3 extends JPanel {
     private static void start(){
         bigTable = new int[bigDim][bigDim]; 
         total = (dimension) * (dimension);
+        stepsScreen = new String[total];
+        stepsScreen[step] = "";
         t = new int[dimension][dimension];
+        merywiss = new int[dimension][dimension];
+        for (int r = 0; r < dimension; r++){
+            for (int c = 0; c < dimension; c++){
+                merywiss[r][c] = 0;
+            }
+        }
         for (int r = 0; r < bigDim; r++)
             for (int c = 0; c < bigDim; c++)
                 if (r < 2 || r > bigDim - 3 || c < 2 || c > bigDim - 3)
@@ -161,22 +171,16 @@ public class Knight3 extends JPanel {
                 //si es un margen = -1 no va a situar el caballo por eso pasa a la 
                 //siguiente iteración
                 if (bigTable[i][j] == -1) continue;
-                System.out.println("donde colocaremos en bigtable i: " + i + " j: " +j);
                 t[i-2][j-2] = bigTable[i][j]; //t va a poner las soluciones correctas
                 
-                System.out.println("t");
-                for (int k = 0; k < dimension; k++){      //columna
-                    for (int l = 0; l < dimension; l ++){ //fila
-                        System.out.print(t[l][k] + "   ");  
-                    }
-                    System.out.println("");
-                }
             }
         }
     }
     
     public void paint(Graphics g){
+        
         int d = dimension;
+        //char[] numero = {(char)step};
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/knight.png");
         Image img2 = Toolkit.getDefaultToolkit().getImage("src/x.png");
         g.setColor(new Color(255, 189, 35));
@@ -196,18 +200,24 @@ public class Knight3 extends JPanel {
                 }
             }
         }
-        
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.BLACK);
         for(int i = 0; i < d; i++){
             for(int j = 0; j < d; j++){
-                System.out.println("valor de t abans de 198: "+ t[i][j] );
-                System.out.println("valor de started: "+ started);
-                if(t[i][j] == 0 && started) 
-                    g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
+                if(t[i][j] == 0 && started && merywiss[i][j] == 0){
+                    merywiss[i][j] = step+1;
+                    
+                    
+                    //g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
+                }
+                if (merywiss[i][j] != 0 && t[i][j] == 0 && started){
+                    g2d.drawString("" + merywiss[i][j], margin + i*size, margin + j * size+ size);
+                }
             }
         }
         for(int i = 0; i < d; i++)
             for(int j = 0; j < d; j++)
-                if(step == total+1){
+                if(step == total-1){
                     step = 0;
                     JOptionPane.showMessageDialog(this, "Finish");
                     frame.dispose();

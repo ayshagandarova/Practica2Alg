@@ -217,7 +217,7 @@ public class Knight extends JPanel {
         }
         for(int i = 0; i < d; i++)
             for(int j = 0; j < d; j++)
-                if(step == total){
+                if(step == total-1){
                     step = 0;
                     JOptionPane.showMessageDialog(this, "Finish");
                     frame.dispose();

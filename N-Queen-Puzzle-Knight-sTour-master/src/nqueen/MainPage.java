@@ -253,9 +253,9 @@ public class MainPage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, msg1);
             }else{
                  Knight.main(arr);
-//                 Knight1.main(arr);
-//                 Knight2.main(arr);
-//                 Knight3.main(arr);
+                 Knight1.main(arr);
+                 Knight2.main(arr);
+                 Knight3.main(arr);
 
                 
             }

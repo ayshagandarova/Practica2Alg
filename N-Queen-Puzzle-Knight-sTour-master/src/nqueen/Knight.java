@@ -23,7 +23,7 @@ public class Knight extends JPanel {
     private static int x;
     private static int y;
     private static String[] stepsScreen;
-    private static boolean merywiss[][]; 
+    private static int merywiss[][]; 
     private int indexStep = 0;
     
     public Knight() {
@@ -69,10 +69,10 @@ public class Knight extends JPanel {
         stepsScreen = new String[total];
         stepsScreen[step] = "";
         t = new int[dimension][dimension];
-        merywiss = new boolean[dimension][dimension];
+        merywiss = new int[dimension][dimension];
         for (int r = 0; r < dimension; r++){
             for (int c = 0; c < dimension; c++){
-                merywiss[r][c] = false;
+                merywiss[r][c] = 0;
             }
         }
         for (int r = 0; r < bigDim; r++)
@@ -204,12 +204,15 @@ public class Knight extends JPanel {
         g2d.setColor(Color.BLACK);
         for(int i = 0; i < d; i++){
             for(int j = 0; j < d; j++){
-                if(t[i][j] == 0 && started && (merywiss[i][j] == false)){
-                    merywiss[i][j] = true;
-                    g2d.drawString(step+"", margin + i*size, margin + j * size+ size);
+                if(t[i][j] == 0 && started && (merywiss[i][j] == 0)){
+                    merywiss[i][j] = t[i][j];
+                    
                     //g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
 //                    indexStep++;
                     //System.out.println("index"+indexStep);
+                }
+                if (merywiss[i][j] != 0){
+                    g2d.drawString(step+"", margin + i*size, margin + j * size+ size);
                 }
             }
         }

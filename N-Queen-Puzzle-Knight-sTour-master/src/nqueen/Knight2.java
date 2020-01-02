@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.*;
 import javax.swing.*;
 
-public class Knight extends JPanel {
+public class Knight2 extends JPanel {
     private static int bigDim;
     private static int dim;
     private static int dimension;   
-    private final static int[][] KnightsMovement = {{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}};  // knight moves : 8 different ways
+    private final static int[][] KnightsMovement = {{-2,1},{1,-2},{2,1},{1,2},{-1,-2},{-1,2},{-2,-1},{2,-1}};  // knight moves : 8 different ways
+    //{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}}
     private static int[][] bigTable;
     private static int total;
     private static int t[][];    
@@ -24,7 +25,7 @@ public class Knight extends JPanel {
     private static int y;
     
     
-    public Knight() {
+    public Knight2() {
         initComponents();
     }
     
@@ -41,7 +42,7 @@ public class Knight extends JPanel {
         
         frame = new JFrame();
         frame.setSize(dim+2*margin, dim+2*margin+size/2); 
-        frame.getContentPane().add(new Knight());
+        frame.getContentPane().add(new Knight2());
         frame.setLocationRelativeTo(null);
         frame.setBackground(Color.LIGHT_GRAY);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -176,7 +177,6 @@ public class Knight extends JPanel {
     
     public void paint(Graphics g){
         int d = dimension;
-        char[] numero = {'1','2'};
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/knight.png");
         Image img2 = Toolkit.getDefaultToolkit().getImage("src/x.png");
         g.setColor(new Color(255, 189, 35));
@@ -202,7 +202,6 @@ public class Knight extends JPanel {
                 System.out.println("valor de t abans de 198: "+ t[i][j] );
                 System.out.println("valor de started: "+ started);
                 if(t[i][j] == 0 && started) 
-                    g.drawString("1", margin + i*size, margin + j * size);
                     g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
             }
         }

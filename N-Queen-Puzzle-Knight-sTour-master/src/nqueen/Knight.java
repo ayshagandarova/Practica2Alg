@@ -23,7 +23,8 @@ public class Knight extends JPanel {
     private static int x;
     private static int y;
     private static String[] stepsScreen;
-    
+    private static boolean merywiss[][]; 
+    private int indexStep = 0;
     
     public Knight() {
         initComponents();
@@ -56,6 +57,7 @@ public class Knight extends JPanel {
                 stepsScreen[step] = ""+ step;
                 System.out.print("El contador = " +stepsScreen[step] + "\n");
                 step++;
+                stepsScreen[step] = "";
               }
         });
         start();
@@ -67,6 +69,12 @@ public class Knight extends JPanel {
         stepsScreen = new String[total];
         stepsScreen[step] = "";
         t = new int[dimension][dimension];
+        merywiss = new boolean[dimension][dimension];
+        for (int r = 0; r < dimension; r++){
+            for (int c = 0; c < dimension; c++){
+                merywiss[r][c] = false;
+            }
+        }
         for (int r = 0; r < bigDim; r++)
             for (int c = 0; c < bigDim; c++)
                 if (r < 2 || r > bigDim - 3 || c < 2 || c > bigDim - 3)
@@ -192,14 +200,17 @@ public class Knight extends JPanel {
                 }
             }
         }
-        Graphics2D g2d = (Graphics2D)g; 
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.BLACK);
         for(int i = 0; i < d; i++){
             for(int j = 0; j < d; j++){
-                if(t[i][j] == 0 && started) 
-                    g2d.drawString(stepsScreen[step], margin + i*size, margin + j * size+ size);
+                if(t[i][j] == 0 && started && (merywiss[i][j] == false)){
+                    merywiss[i][j] = true;
+                    g2d.drawString(step+"", margin + i*size, margin + j * size+ size);
                     //g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
-                    
-                   
+//                    indexStep++;
+                    //System.out.println("index"+indexStep);
+                }
             }
         }
         for(int i = 0; i < d; i++)
@@ -212,7 +223,6 @@ public class Knight extends JPanel {
                 else if(t[i][j] == step+1){
                     started = true;
                     g.drawImage(img1, margin + i*size, margin + j * size, size, size , null , this);
-                   
                     t[i][j] = 0;
                 }    
     }

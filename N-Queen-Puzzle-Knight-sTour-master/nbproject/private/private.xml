@@ -5,17 +5,15 @@
             <url>src/nqueen/MainPage.java</url>
             <bookmark id="1">
                 <name/>
-                <line>215</line>
+                <line>216</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/mery/Desktop/Practica2Alg/N-Queen-Puzzle-Knight-sTour-master/src/nqueen/MainPage.java</file>
-            <file>file:/Users/mery/Desktop/Practica2Alg/N-Queen-Puzzle-Knight-sTour-master/src/nqueen/NQueen.java</file>
-            <file>file:/Users/mery/Desktop/Practica2Alg/N-Queen-Puzzle-Knight-sTour-master/src/nqueen/Knight.java</file>
-            <file>file:/Users/mery/Desktop/Practica2Alg/N-Queen-Puzzle-Knight-sTour-master/src/nqueen/Queen.java</file>
+            <file>file:/Users/andreamoreysanchez/Desktop/Algoritmia/Practica2Alg/N-Queen-Puzzle-Knight-sTour-master/src/nqueen/MainPage.java</file>
+            <file>file:/Users/andreamoreysanchez/Desktop/Algoritmia/Practica2Alg/N-Queen-Puzzle-Knight-sTour-master/src/nqueen/Knight.java</file>
         </group>
     </open-files>
 </project-private>

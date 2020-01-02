@@ -22,6 +22,7 @@ public class Knight extends JPanel {
     static JFrame frame;
     private static int x;
     private static int y;
+    private static String[] stepsScreen;
     
     
     public Knight() {
@@ -52,9 +53,9 @@ public class Knight extends JPanel {
         frame.add(btnNext);
         btnNext.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stepsScreen[step] = ""+ step;
+                System.out.print("El contador = " +stepsScreen[step] + "\n");
                 step++;
-                System.out.print("EL contador = " +step + "\n");
-                
               }
         });
         start();
@@ -63,6 +64,8 @@ public class Knight extends JPanel {
     private static void start(){
         bigTable = new int[bigDim][bigDim]; 
         total = (dimension) * (dimension);
+        stepsScreen = new String[total];
+        stepsScreen[step] = "";
         t = new int[dimension][dimension];
         for (int r = 0; r < bigDim; r++)
             for (int c = 0; c < bigDim; c++)
@@ -160,23 +163,16 @@ public class Knight extends JPanel {
                 //si es un margen = -1 no va a situar el caballo por eso pasa a la 
                 //siguiente iteración
                 if (bigTable[i][j] == -1) continue;
-                System.out.println("donde colocaremos en bigtable i: " + i + " j: " +j);
                 t[i-2][j-2] = bigTable[i][j]; //t va a poner las soluciones correctas
                 
-                System.out.println("t");
-                for (int k = 0; k < dimension; k++){      //columna
-                    for (int l = 0; l < dimension; l ++){ //fila
-                        System.out.print(t[l][k] + "   ");  
-                    }
-                    System.out.println("");
-                }
             }
         }
     }
     
     public void paint(Graphics g){
+        
         int d = dimension;
-        char[] numero = {'1','2'};
+        //char[] numero = {(char)step};
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/knight.png");
         Image img2 = Toolkit.getDefaultToolkit().getImage("src/x.png");
         g.setColor(new Color(255, 189, 35));
@@ -196,14 +192,14 @@ public class Knight extends JPanel {
                 }
             }
         }
-        
+        Graphics2D g2d = (Graphics2D)g; 
         for(int i = 0; i < d; i++){
             for(int j = 0; j < d; j++){
-                System.out.println("valor de t abans de 198: "+ t[i][j] );
-                System.out.println("valor de started: "+ started);
                 if(t[i][j] == 0 && started) 
-                    g.drawString("1", margin + i*size, margin + j * size);
-                    g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
+                    g2d.drawString(stepsScreen[step], margin + i*size, margin + j * size+ size);
+                    //g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
+                    
+                   
             }
         }
         for(int i = 0; i < d; i++)
@@ -216,6 +212,7 @@ public class Knight extends JPanel {
                 else if(t[i][j] == step+1){
                     started = true;
                     g.drawImage(img1, margin + i*size, margin + j * size, size, size , null , this);
+                   
                     t[i][j] = 0;
                 }    
     }

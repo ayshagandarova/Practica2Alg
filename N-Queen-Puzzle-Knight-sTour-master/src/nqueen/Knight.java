@@ -205,26 +205,10 @@ public class Knight extends JPanel {
         for(int i = 0; i < d; i++){
             for(int j = 0; j < d; j++){
                 if(t[i][j] == 0 && started && merywiss[i][j] == 0){
-                    System.out.println("t["+i+"]["+j+"]  =  " + t[i][j]);
-                    System.out.println("La t :");
-                    for (int k=0; k< d;k++){
-                        for (int y= 0; y< d ; y++){
-                            System.out.print(t[k][y] + "   ");
-                        }
-                        System.out.println("");
-                    }
-                    merywiss[i][j] = step;
-                    System.out.println("La merywiss :");
-                    for (int k=0; k< d;k++){
-                        for (int y= 0; y< d ; y++){
-                            System.out.print(merywiss[k][y] + "   ");
-                        }
-                        System.out.println("");
-                    }
+                    merywiss[i][j] = step+1;
+                    
                     
                     //g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
-//                    indexStep++;
-                    //System.out.println("index"+indexStep);
                 }
                 if (merywiss[i][j] != 0 && t[i][j] == 0 && started){
                     g2d.drawString("" + merywiss[i][j], margin + i*size, margin + j * size+ size);
@@ -233,7 +217,7 @@ public class Knight extends JPanel {
         }
         for(int i = 0; i < d; i++)
             for(int j = 0; j < d; j++)
-                if(step == total+1){
+                if(step == total){
                     step = 0;
                     JOptionPane.showMessageDialog(this, "Finish");
                     frame.dispose();

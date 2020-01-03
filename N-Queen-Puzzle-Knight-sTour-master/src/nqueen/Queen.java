@@ -19,6 +19,7 @@ public class Queen extends JPanel {
       public void paint(Graphics g){
         int d = dimension;
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/pic_queen.png");
+        Image img2 = Toolkit.getDefaultToolkit().getImage("src/x.png");
         g.setColor(new Color(255, 189, 35));
         g.fillRect(margin, margin, dim, dim);
         if(d == 1)
@@ -38,17 +39,22 @@ public class Queen extends JPanel {
         }
         
         
-        for(int i = 0; i < d; i++)
-            for(int j = 0; j < d; j++)
-                if(t[i][j] == 'Q')
-                g.drawImage(img1, margin + i*size, margin + j * size, size, size , null , this); 
+        for(int i = 0; i < d; i++){
+            for(int j = 0; j < d; j++){
+                if(t[i][j] == 'Q'){
+                    g.drawImage(img1, margin + i*size, margin + j * size, size, size , null , this); 
+                }
+                if(t[i][j] == 'q'){
+                     g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
+                }
+            }
+        }
     }
     public Queen() {
         initComponents();
     }
     
     public static void main(String[] args){
-   
     dimension = Integer.parseInt(args[0]);
     size = Integer.parseInt(args[1]);
     x = Integer.parseInt(args[2]);
@@ -63,14 +69,25 @@ public class Queen extends JPanel {
     //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
     t = new char[dimension][dimension];
-        enumerate(dimension);
+    enumerate(dimension);
+    
     }
     
 	public static boolean isConsistent(int[] q, int n) {
         for (int i = 0; i < n; i++) {
-            if (q[i] == q[n])             return false;   
-            if ((q[i] - q[n]) == (n - i)) return false;   
-            if ((q[n] - q[i]) == (n - i)) return false;   
+            if (q[i] == q[n]){  
+                return false;
+            }   
+            if ((q[i] - q[n]) == (n - i)){ 
+                return false;
+            }   
+            if ((q[n] - q[i]) == (n - i)){ 
+                return false;
+            }
+            if(q[i] == (y-1)){  //así funciona la octava columna
+                //System.out.println("q["+ i + "] "+ q[i]);   //creo que q[i] es la fila
+                return false;
+            }
         }
         return true;
     }
@@ -79,25 +96,35 @@ public class Queen extends JPanel {
         int n = q.length;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (q[i] == j) t[i][j] = 'Q';
-                else t[i][j] = '*';
+                if (q[i] == j){
+                    t[i][j] = 'Q';
+                }
+                else{
+                    t[i][j] = '*';
+                }
+                if((x-1)==i && (y-1)==j){
+                    t[i][j] = 'q';
+                }
             }
         }  
     }
 
    public static void enumerate(int n) {
         int[] a = new int[n];
+        t[x-1][y-1] = 'Q';
         enumerate(a, 0);
     }
 
     public static void enumerate(int[] q, int k) {
         int n = q.length;
-        if (k == n) printTable(q);
+        if (k == n){
+            printTable(q);
+        }
         else {
-            for (int i = 0; i < n; i++) {
-                q[k] = i;
-                if (isConsistent(q, k)) enumerate(q, k+1);
-            }
+                for (int i = 0; i < n; i++) {
+                    q[k] = i;
+                    if (isConsistent(q, k)) enumerate(q, k+1);
+                }
         }
     }  
 

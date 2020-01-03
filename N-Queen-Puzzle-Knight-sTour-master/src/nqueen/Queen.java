@@ -61,8 +61,7 @@ public class Queen extends JPanel {
     frame.setSize(dim+2* + margin, dim+2* + margin + size / 2);
     frame.getContentPane().add(new Queen());
     frame.setLocationRelativeTo(null);
-    frame.setBackground(Color.LIGHT_GRAY);
-    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setBackground(Color.WHITE);
     frame.setVisible(true);
     t = new char[dimension][dimension];
     enumerate(dimension);

@@ -10,11 +10,15 @@ import javax.swing.*;
 
 public class MainPage extends javax.swing.JFrame {
    
-    private static String msg1 = "Can not find solution, please try again "
-            + "\nSolution does not exis for 1,2,3,4,9\nIf you enter big number calculation takes to long"
-            + "\nand application may say no solution, in this case try again with same number, "
-            + "\nif chess board doesn't appear when you click the button that means you should try next time";
-    private static String msg2 = "Application works for natural number in range 1..14, for bigger number it will take more time except 2 and 3!";
+    private static String msg1 = "No se puede encontrar solución, por favor prueba otra vez "
+            + "\nNo existe solución para n = 1,2,3,4 o 9"
+            + "\nSi introduces una n muy grande, el cálculo tarda mucho. \n"
+            + "Por consiguiente el programa puede decir que no hay solución, \n"
+            + "en este caso prueba otra vez con la misma n\n";
+            //+ "\nif chess board doesn't appear when you click the button that means you should try next time";
+    private static String msg2 = "El programa funciona solo para números naturales de rango [1,14], \n"
+            + "para números más grandes tardará bastante\n"
+            + "No hay solución para n= 1,2 o 3";
     // el msg 2 es solo para la reina
     public MainPage() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -59,10 +63,10 @@ public class MainPage extends javax.swing.JFrame {
         TextDimension.setText("8");
         TextDimension.setToolTipText("");
         TextDimension.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 TextDimensionInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         TextDimension.addActionListener(new java.awt.event.ActionListener() {
@@ -120,9 +124,9 @@ public class MainPage extends javax.swing.JFrame {
 
         jText_posy.setText("1");
 
-        jLabel5.setText("inicial x:");
+        jLabel5.setText("FILA");
 
-        jLabel6.setText("inicial y:");
+        jLabel6.setText("COLUMNA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,30 +137,30 @@ public class MainPage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4))
-                    .addComponent(jText_posx, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jText_posx, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(radBtn2)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGap(19, 19, 19)
-                                    .addComponent(radBtn1))
                                 .addComponent(cellCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jText_posy, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
                                 .addComponent(TextDimension, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(radBtn1))
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(34, 34, 34))))
+                        .addGap(31, 31, 31))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,9 +177,9 @@ public class MainPage extends javax.swing.JFrame {
                             .addComponent(TextDimension, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radBtn1)
-                            .addComponent(jLabel2))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(radBtn1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radBtn2)))
                 .addGap(18, 18, 18)

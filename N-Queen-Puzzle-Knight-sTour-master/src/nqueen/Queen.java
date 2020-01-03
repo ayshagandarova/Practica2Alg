@@ -19,7 +19,6 @@ public class Queen extends JPanel {
       public void paint(Graphics g){
         int d = dimension;
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/pic_queen.png");
-        Image img2 = Toolkit.getDefaultToolkit().getImage("src/x.png");
         g.setColor(new Color(255, 189, 35));
         g.fillRect(margin, margin, dim, dim);
         if(d == 1)
@@ -44,9 +43,6 @@ public class Queen extends JPanel {
                 if(t[i][j] == 'Q'){
                     g.drawImage(img1, margin + i*size, margin + j * size, size, size , null , this); 
                 }
-                if(t[i][j] == 'q'){
-                     g.drawImage(img2, margin + i*size, margin + j * size, size, size , null , this);
-                }
             }
         }
     }
@@ -57,8 +53,8 @@ public class Queen extends JPanel {
     public static void main(String[] args){
     dimension = Integer.parseInt(args[0]);
     size = Integer.parseInt(args[1]);
-    x = Integer.parseInt(args[2]);
-    y = Integer.parseInt(args[3]);
+    x = (Integer.parseInt(args[2]))-1;
+    y = (Integer.parseInt(args[3]))-1;
     
     dim = dimension * size;
     JFrame frame = new JFrame();
@@ -84,10 +80,7 @@ public class Queen extends JPanel {
             if ((q[n] - q[i]) == (n - i)){ 
                 return false;
             }
-            if(q[i] == (y-1)){  //así funciona la octava columna
-                //System.out.println("q["+ i + "] "+ q[i]);   //creo que q[i] es la fila
-                return false;
-            }
+            
         }
         return true;
     }
@@ -97,21 +90,20 @@ public class Queen extends JPanel {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (q[i] == j){
+                    t[y][x] = 'Q';      //los he tenido que girar para que vaya bien
                     t[i][j] = 'Q';
                 }
                 else{
                     t[i][j] = '*';
                 }
-                if((x-1)==i && (y-1)==j){
-                    t[i][j] = 'q';
-                }
+               
             }
-        }  
+            
+        } 
     }
 
    public static void enumerate(int n) {
         int[] a = new int[n];
-        t[x-1][y-1] = 'Q';
         enumerate(a, 0);
     }
 
@@ -121,8 +113,9 @@ public class Queen extends JPanel {
             printTable(q);
         }
         else {
-                for (int i = 0; i < n; i++) {
-                    q[k] = i;
+            for (int i = 0; i < n; i++) {
+                q[k] = i;
+                q[y] = x;
                     if (isConsistent(q, k)) enumerate(q, k+1);
                 }
         }

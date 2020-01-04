@@ -60,7 +60,7 @@ public class MainPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setText("Tamany tauler nxn: ");
+        jLabel1.setText("Tamaño tablero nxn: ");
 
         TextDimension.setText("8");
         TextDimension.setToolTipText("");
@@ -79,7 +79,7 @@ public class MainPage extends javax.swing.JFrame {
 
         radBtn1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         radBtn1.setSelected(true);
-        radBtn1.setText("Moviments Cavall");
+        radBtn1.setText("Movimientos Caballo");
         radBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radBtn1ActionPerformed(evt);
@@ -87,21 +87,21 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         radBtn2.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        radBtn2.setText("N Reines");
+        radBtn2.setText("N Reinas");
         radBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radBtn2ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Comença");
+        jButton1.setText("Empezar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Selecciona un mode:");
+        jLabel2.setText("Selecciona un modo:");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/info.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,7 +113,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Tamany casella:");
+        jLabel4.setText("Tamaño casilla:");
 
         cellCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80" }));
 
@@ -195,7 +195,6 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jText_posx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,7 +202,6 @@ public class MainPage extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jText_posy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,7 +285,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Per favor, introdueix un nombre natural:");
+            JOptionPane.showMessageDialog(this, "Por favor, introduce un número natural:");
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed

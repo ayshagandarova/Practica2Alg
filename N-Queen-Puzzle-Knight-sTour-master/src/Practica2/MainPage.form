@@ -134,7 +134,6 @@
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="-18" max="32767" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jText_posx" min="-2" max="-2" attributes="0"/>
@@ -143,7 +142,6 @@
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jText_posy" min="-2" max="-2" attributes="0"/>
@@ -157,7 +155,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tamany tauler nxn: "/>
+            <Property name="text" type="java.lang.String" value="Tama&#xf1;o tablero nxn: "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TextDimension">
@@ -176,7 +174,7 @@
               <Font name="Lucida Grande" size="10" style="0"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Moviments Cavall"/>
+            <Property name="text" type="java.lang.String" value="Movimientos Caballo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radBtn1ActionPerformed"/>
@@ -187,7 +185,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Grande" size="10" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="N Reines"/>
+            <Property name="text" type="java.lang.String" value="N Reinas"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radBtn2ActionPerformed"/>
@@ -195,7 +193,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Comen&#xe7;a"/>
+            <Property name="text" type="java.lang.String" value="Empezar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -203,7 +201,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Selecciona un mode:"/>
+            <Property name="text" type="java.lang.String" value="Selecciona un modo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -219,7 +217,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tamany casella:"/>
+            <Property name="text" type="java.lang.String" value="Tama&#xf1;o casilla:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cellCombo">
